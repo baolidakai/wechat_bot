@@ -71,7 +71,7 @@ def get_pic(msg):
     info = convert_image('img/' + re.sub('.png', '.jpg', filename), 'tmp.jpg')
     if info:
       itchat.send(u'机器人: ' + info, source)
-    itchat.send_image('tmp.jpg', source)
+    # itchat.send_image('tmp.jpg', source)
   else:
     print(msg['ToUserName'])
     print(msg['FromUserName'])

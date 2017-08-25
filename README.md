@@ -4,9 +4,12 @@ Currently it works in a single group chat. Replace the trigger\_user set with a 
 
 The current text response is from tuling robot.
 
+Working on image classification
+
 
 ## Prerequisites
 * tensorflow
 * itchat
-* opencv
+* opencv3
 * Install tensorflow models inside this repository. See https://github.com/tensorflow/models/tree/master/slim.
+* Download http://download.tensorflow.org/models/inception\_v3\_2016\_08\_28.tar.gz inside pre\_trained
