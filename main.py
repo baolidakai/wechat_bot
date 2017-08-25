@@ -35,16 +35,24 @@ def get_response(msg):
   except:
     pass
 
-trigger_user = {u'@@b7326c0e23562a9cfb91992aa881e5fcda2b167f4ac699cb907f8745938b0c17'} # this is our group chat
+trigger_nicknames = {u'邓博文', u'Bao Qi', u'小七'}
+
+def get_source(msg):
+  if msg['ToUserName'].startswith('@@'):
+    return msg['ToUserName']
+  if msg['FromUserName'].startswith('@@'):
+    return msg['FromUserName']
+  return None
 
 @itchat.msg_register([itchat.content.TEXT], isGroupChat=True)
 def reply_message(msg):
-  source = None
-  if msg['ToUserName'] in trigger_user:
-    source = msg['ToUserName']
-  if msg['FromUserName'] in trigger_user:
-    source = msg['FromUserName']
+  if msg['ActualNickName'] not in trigger_nicknames:
+    print('Ignoring this message')
+    print(msg)
+    return
+  source = get_source(msg)
   if source:
+    print(source)
     content = msg['Text']
     if content.startswith(' '):
       print('Replying: ' + content)
@@ -59,22 +67,24 @@ def reply_message(msg):
 
 @itchat.msg_register([itchat.content.PICTURE], isGroupChat=True)
 def get_pic(msg):
-  source = None
-  if msg['ToUserName'] in trigger_user:
-    source = msg['ToUserName']
-  if msg['FromUserName'] in trigger_user:
-    source = msg['FromUserName']
+  if msg['ActualNickName'] not in trigger_nicknames:
+    print('Ignoring this message')
+    print(msg)
+    return
+  source = get_source(msg)
   if source:
     filename = msg['FileName']
     msg['Text'](filename)
     shutil.move(filename, 'img/' + re.sub('.png', '.jpg', filename))
-    info = convert_image('img/' + re.sub('.png', '.jpg', filename), 'tmp.jpg')
-    if info:
-      itchat.send(u'机器人: ' + info, source)
+    try:
+      info = convert_image('img/' + re.sub('.png', '.jpg', filename), 'tmp.jpg')
+      if info:
+        print('output: ' + info)
+        itchat.send(u'机器人: ' + info, source)
+    except:
+      print('failed somewhere')
     # itchat.send_image('tmp.jpg', source)
-  else:
-    print(msg['ToUserName'])
-    print(msg['FromUserName'])
+  print(msg)
 
 
 itchat.auto_login(hotReload=True)
