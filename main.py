@@ -1,5 +1,11 @@
 import requests
 import itchat
+import os
+import shutil
+import re
+import tensorflow as tf
+
+from computer_vision import convert_image
 
 survived = True
 
@@ -29,24 +35,47 @@ def get_response(msg):
   except:
     pass
 
-trigger_user = {u'@@fa4298c09bd6ab30496e45ec549a325250e47ee6d6726e681de81c99ee758438'} # this is our group chat
+trigger_user = {u'@@b7326c0e23562a9cfb91992aa881e5fcda2b167f4ac699cb907f8745938b0c17'} # this is our group chat
 
 @itchat.msg_register([itchat.content.TEXT], isGroupChat=True)
 def reply_message(msg):
   source = None
-  print(msg)
   if msg['ToUserName'] in trigger_user:
     source = msg['ToUserName']
   if msg['FromUserName'] in trigger_user:
     source = msg['FromUserName']
-  content = msg['Text']
-  if source and content.startswith(' '):
-    defaultReply = 'I received: ' + msg['Text']
-    if survived:
-      reply = get_response(msg['Text'])
-      reply = reply or defaultReply
-      reply = u'机器人: ' + reply
-      itchat.send(reply, source)
+  if source:
+    content = msg['Text']
+    if content.startswith(' '):
+      print('Replying: ' + content)
+      defaultReply = u'不知道该说什么好'
+      if survived:
+        reply = get_response(msg['Text'].strip())
+        reply = reply or defaultReply
+        reply = u'机器人: ' + reply
+        itchat.send(reply, source)
+  print(msg)
+
+
+@itchat.msg_register([itchat.content.PICTURE], isGroupChat=True)
+def get_pic(msg):
+  source = None
+  if msg['ToUserName'] in trigger_user:
+    source = msg['ToUserName']
+  if msg['FromUserName'] in trigger_user:
+    source = msg['FromUserName']
+  if source:
+    filename = msg['FileName']
+    msg['Text'](filename)
+    shutil.move(filename, 'img/' + re.sub('.png', '.jpg', filename))
+    info = convert_image('img/' + re.sub('.png', '.jpg', filename), 'tmp.jpg')
+    if info:
+      itchat.send(u'机器人: ' + info, source)
+    itchat.send_image('tmp.jpg', source)
+  else:
+    print(msg['ToUserName'])
+    print(msg['FromUserName'])
+
 
 itchat.auto_login(hotReload=True)
 itchat.run()

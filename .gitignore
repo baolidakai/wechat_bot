@@ -1,1 +1,5 @@
 itchat.pkl
+img/*
+tmp.jpg
+models/*
+__pycache__/*
