@@ -36,6 +36,12 @@ def get_response(msg):
     pass
 
 trigger_nicknames = {u'邓博文', u'Bao Qi', u'小七'}
+trigger_usernames = {
+  '@14341204faee8b10343b43632b7aa83163b81c64e04825c7df32480d9d16a63a', # 邓博文
+  '@3a680a3c3bcbb87e139ce2e74726ce24', # BQ
+  '@a4e4472a92099212296e110076c159daf20ca505b9c51c405f09a6dc0655b6ec', # 小七
+  '@bbf211baa963bd4a84ba5b0769d24c82dd50b6911af6d9e9c4d789da8d528711' # 黄益民
+}
 
 def get_source(msg):
   if msg['ToUserName'].startswith('@@'):
@@ -65,13 +71,14 @@ def reply_message(msg):
   print(msg)
 
 
-@itchat.msg_register([itchat.content.PICTURE], isGroupChat=True)
+@itchat.msg_register([itchat.content.PICTURE])
 def get_pic(msg):
-  if msg['ActualNickName'] not in trigger_nicknames:
+  if msg.get('ActualNickName', None) not in trigger_nicknames and msg.get('FromUserName', None) not in trigger_usernames:
     print('Ignoring this message')
     print(msg)
     return
   source = get_source(msg)
+  print(source)
   if source:
     filename = msg['FileName']
     msg['Text'](filename)
@@ -80,7 +87,8 @@ def get_pic(msg):
       info = convert_image('img/' + re.sub('.png', '.jpg', filename), 'tmp.jpg')
       if info:
         print('output: ' + info)
-        itchat.send(u'机器人: ' + info, source)
+        if survived:
+          itchat.send(u'机器人: ' + info, source)
     except:
       print('failed somewhere')
     # itchat.send_image('tmp.jpg', source)
