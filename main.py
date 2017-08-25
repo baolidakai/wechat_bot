@@ -42,12 +42,17 @@ trigger_usernames = {
   '@a4e4472a92099212296e110076c159daf20ca505b9c51c405f09a6dc0655b6ec', # 小七
   '@bbf211baa963bd4a84ba5b0769d24c82dd50b6911af6d9e9c4d789da8d528711' # 黄益民
 }
+myself_username = '@14341204faee8b10343b43632b7aa83163b81c64e04825c7df32480d9d16a63a'
 
 def get_source(msg):
   if msg['ToUserName'].startswith('@@'):
     return msg['ToUserName']
   if msg['FromUserName'].startswith('@@'):
     return msg['FromUserName']
+  elif msg['ToUserName'] == myself_username:
+    return msg['FromUserName']
+  elif msg['FromUserName'] == myself_username:
+    return msg['ToUserName']
   return None
 
 @itchat.msg_register([itchat.content.TEXT], isGroupChat=True)
