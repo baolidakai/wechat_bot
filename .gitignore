@@ -4,3 +4,4 @@ tmp.jpg
 models/*
 __pycache__/*
 pre_trained/*
+data.json
