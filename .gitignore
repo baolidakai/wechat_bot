@@ -5,3 +5,5 @@ models/*
 __pycache__/*
 pre_trained/*
 data.json
+rules.json
+computer_vision_example.py

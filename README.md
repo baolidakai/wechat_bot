@@ -23,8 +23,26 @@ Working on image classification
 	],
 	"myself_username": "@14341204faee8b10343b43632b7aa83163b81c64e04825c7df32480d9d16a63a"
 }
+* Add a file named rules.json which stores manual rules like:
+{
+	"名字": "小歪",
+	"星座": "巨蟹座"
+}
 
 ## TODOs
-* Add notification functionality
 * Use mobilenet+ssd
 * Make the code more efficient
+* Add notification functionality
+* Stablize the reply, currently it triggers multiple replies occassionally
+* Upload the corn.stanford.edu
+* Add a separate thread, which could send messages on the computer
+* Put everything in a class
+
+## File System
+utils.py: various utility methods
+rules.json: hand-written text replies
+computer\_vision.py: computer vision program which returns image label
+natural\_language\_processing.py: nlp program which returns a reply given a text message
+models: directory containing the tensorflow/models module
+pre\_trained: directory which stores the model ckpt
+data.json: json file containing all private data

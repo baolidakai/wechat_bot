@@ -9,7 +9,7 @@ import base64
 import urllib.request as urllib
 
 import sys
-sys.path.append(r'/home/radmin/programs/wechat/models/slim') # Change this on your computer
+sys.path.append(os.path.join(os.getcwd(), 'models/slim'))
 
 from datasets import imagenet
 from nets import inception
@@ -32,7 +32,7 @@ def convert_image(src, dst):
 
     image = tf.image.decode_jpeg(image_string, channels=3)
     processed_image = inception_preprocessing.preprocess_image(image, image_size, image_size, is_training=False)
-    processed_images  = tf.expand_dims(processed_image, 0)
+    processed_images = tf.expand_dims(processed_image, 0)
 
     with slim.arg_scope(inception.inception_v3_arg_scope()):
       logits, _ = inception.inception_v3(processed_images, num_classes=1001, is_training=False)
@@ -52,3 +52,5 @@ def convert_image(src, dst):
   print('Got the result')
   print(rtn)
   return rtn
+
+
