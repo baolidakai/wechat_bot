@@ -3,10 +3,9 @@ import json
 
 API_KEY = 'ca098ebe818b49df98af997bef29b3b3'
 
-rules = json.load(open('rules.json', 'r'))
-
 # Given the content in a string, return the response and 
 def get_response(content):
+  rules = json.load(open('rules.json', 'r'))
   if content == u'傻逼滚':
     return u'我滚了', False
   if content == u'傻逼回来':

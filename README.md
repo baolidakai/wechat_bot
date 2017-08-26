@@ -7,6 +7,10 @@ The current text response is from tuling robot.
 Working on image classification
 
 ## Prerequisites
+* Edit ~/.config/ipython/profile\_default/startup/ipython3\_startup.ipy and put
+%load\_ext autoreload
+%autoreload 2
+to enable autoreload when you change the code
 * tensorflow
 * itchat
 * opencv3
@@ -30,13 +34,11 @@ Working on image classification
 }
 
 ## TODOs
-* Use mobilenet+ssd
 * Add notification functionality
-* Stablize the reply, currently it triggers multiple replies occassionally
 * Upload the corn.stanford.edu
 * Add a separate thread, which could send messages on the computer
-* Put everything in a class
-* Periodically renew the data, especially json
+* Add Google search scraper
+* Add image search scraper
 
 ## File System
 utils.py: various utility methods

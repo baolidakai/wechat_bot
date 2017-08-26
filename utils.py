@@ -1,12 +1,11 @@
 # Return the source user to reply to, none if no need to reply
 import json
 
-user_data = json.load(open('data.json', 'r'))
-trigger_nicknames = user_data['trigger_nicknames']
-trigger_usernames = user_data['trigger_usernames']
-myself_username = user_data['myself_username']
-
 def get_source(msg):
+  user_data = json.load(open('data.json', 'r'))
+  trigger_nicknames = user_data['trigger_nicknames']
+  trigger_usernames = user_data['trigger_usernames']
+  myself_username = user_data['myself_username']
   if msg['FromUserName'] == myself_username and msg['ToUserName'].startswith('@@'): # my message in a group chat
     print('my message to a group')
     return msg['ToUserName']
