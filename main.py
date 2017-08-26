@@ -4,6 +4,7 @@ import os
 import shutil
 import re
 import tensorflow as tf
+import time
 
 from computer_vision import convert_image
 from natural_language_processing import get_response
@@ -49,7 +50,9 @@ def get_pic(msg):
     msg['Text'](filename)
     shutil.move(filename, 'img/' + re.sub('.png', '.jpg', filename))
     try:
+      start_time = time.time()
       info = convert_image('img/' + re.sub('.png', '.jpg', filename), 'tmp.jpg')
+      print('{} seconds used for image classification'.format(time.time() - start_time))
       if info:
         print('output: ' + info)
         if survived:

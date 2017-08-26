@@ -31,12 +31,12 @@ Working on image classification
 
 ## TODOs
 * Use mobilenet+ssd
-* Make the code more efficient
 * Add notification functionality
 * Stablize the reply, currently it triggers multiple replies occassionally
 * Upload the corn.stanford.edu
 * Add a separate thread, which could send messages on the computer
 * Put everything in a class
+* Periodically renew the data, especially json
 
 ## File System
 utils.py: various utility methods
