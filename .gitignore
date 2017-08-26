@@ -6,3 +6,5 @@ __pycache__/*
 pre_trained/*
 data.json
 rules.json
+google_scraper.db
+ghostdriver.log

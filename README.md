@@ -15,6 +15,9 @@ to enable autoreload when you change the code
 * itchat
 * opencv3
 * scipy
+* sudo apt-get install chromium-chromedriver, put it in the path
+* Install phantomjs https://www.vultr.com/docs/how-to-install-phantomjs-on-ubuntu-16-04
+* GoogleScraper: https://github.com/NikolaiT/GoogleScraper
 * Install tensorflow models inside this repository. See https://github.com/tensorflow/models/tree/master/slim.
 * Download http://download.tensorflow.org/models/inception\_v3\_2016\_08\_28.tar.gz and unzip inside pre\_trained
 * Install https://github.com/NikolaiT/GoogleScraper
