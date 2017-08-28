@@ -1,23 +1,13 @@
 Wechat robot for fun
 
-Currently it works in a single group chat. Replace the trigger\_user set with a set of group chat ids you want to make it work.
-
 The current text response is from tuling robot.
 
 Working on image classification
 
 ## Prerequisites
-* Edit ~/.config/ipython/profile\_default/startup/ipython3\_startup.ipy and put
-%load\_ext autoreload
-%autoreload 2
-to enable autoreload when you change the code
 * tensorflow
 * itchat
-* opencv3
-* scipy
-* sudo apt-get install chromium-chromedriver, put it in the path
 * Install phantomjs https://www.vultr.com/docs/how-to-install-phantomjs-on-ubuntu-16-04
-* GoogleScraper: https://github.com/NikolaiT/GoogleScraper
 * Install tensorflow models inside this repository. See https://github.com/tensorflow/models/tree/master/slim.
 * Download http://download.tensorflow.org/models/inception\_v3\_2016\_08\_28.tar.gz and unzip inside pre\_trained
 * Install https://github.com/NikolaiT/GoogleScraper
@@ -36,12 +26,15 @@ to enable autoreload when you change the code
 	"星座": "巨蟹座"
 }
 
+## Functionaliy
+* reply chat message if you add a whitespace before the text
+* recognize object inside an image if you send an image
+
 ## TODOs
 * Add notification functionality
-* Upload the corn.stanford.edu
-* Add a separate thread, which could send messages on the computer
-* Add Google search scraper
-* Add image search scraper
+* 搜知乎
+* Enable emoji
+* Enable question answering using wolfram alpha api https://www.yangzhou301.com/2017/05/21/514548234/
 
 ## File System
 utils.py: various utility methods

@@ -1,13 +1,7 @@
 # Computer vision code
-# import cv2
 import tensorflow as tf
 import numpy as np
 import os
-import matplotlib.pyplot as plt
-import base64
-import time
-
-import urllib.request as urllib
 
 import sys
 sys.path.append(os.path.join(os.getcwd(), 'models/slim'))

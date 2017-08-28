@@ -1,6 +1,7 @@
 itchat.pkl
 img/*
-tmp.jpg
+*.jpg
+*.png
 models/*
 __pycache__/*
 pre_trained/*
