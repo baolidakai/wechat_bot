@@ -32,9 +32,11 @@ Working on image classification
 
 ## TODOs
 * Add notification functionality
-* 搜知乎
-* Enable emoji
+* Search on wikipedia
 * Enable question answering using wolfram alpha api https://www.yangzhou301.com/2017/05/21/514548234/
+* Enable emoji
+* Add teach you functionality
+* Add logic understanding
 
 ## File System
 utils.py: various utility methods

@@ -8,7 +8,8 @@ API_KEY = 'ca098ebe818b49df98af997bef29b3b3'
 # key is the trigger word for the feature, value is the corresponding function to use
 special_feature_dict = {
   u'搜索': get_text_search_result,
-  u'搜图': get_image_search_result
+  u'搜图': get_image_search_result,
+  u'搜知乎': get_zhihu_search_result
 }
 
 # Given the content in a string, return the response and 

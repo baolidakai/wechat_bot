@@ -17,16 +17,33 @@ bot.Login(['-q', '1234'])
 group = bot.List('group', '机器人')[0]
 members = [member.name for member in bot.List(group)]
 
+DEBUG = False
+BUDGET = 100
+
 @qqbotslot
 def onQQMessage(bot, contact, member, content):
-  if contact.name == group.name and member.name in members and content.startswith(' '):
-    content = content.strip()
+  global DEBUG
+  global BUDGET
+  if contact.name == group.name and member.name in members and content.startswith('小歪'):
+    content = content[2:]
     try:    
       reply, status = get_response(content)
     except:
       reply = '失败了/哭'
+      status = None
     print('Sending @{} {}'.format(member.name, reply))
-    bot.SendTo(contact, '@{} {}'.format(member, reply))
+    if status is True:
+      DEBUG = False
+    if not DEBUG and BUDGET > 0:
+      BUDGET -= 1
+      print('{} messages left'.format(BUDGET))
+      if reply:
+        bot.SendTo(contact, '@{} {}'.format(member, reply))
+    elif BUDGET == 0:
+      print('message limit exceeded')
+      bot.SendTo(contact, '@{} 我不能再发消息了'.format(member))
+    if status is False:
+      DEBUG = True
   else:
     print('Ignoring')
     print(contact)

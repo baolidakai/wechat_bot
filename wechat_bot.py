@@ -30,6 +30,9 @@ def reply_message(msg):
       if content.startswith(' '):
         print('Received: ' + content)
         reply, status = get_response(content.strip())
+        if not reply:
+          print('Getting no response')
+          return rtn
         if status is True or status is False:
           DEBUG = not status
         if reply == 'tmp.jpg':
