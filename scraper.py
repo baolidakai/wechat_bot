@@ -1,5 +1,6 @@
 from GoogleScraper import scrape_with_config
 from bs4 import BeautifulSoup
+from computer_vision import convert_image
 import urllib
 import requests
 import re
@@ -47,14 +48,15 @@ def get_image_search_result(query):
     content = requests.get(url).content
   except Exception as e:
     print(e)
-    return ''
+    content = ''
   try:
     with open('tmp.jpg', 'wb') as f:
       f.write(content)
+    info = convert_image('tmp.jpg', 'tmp.jpg')
   except:
-    return ''
+    info = ''
   #return 'tmp.jpg'
-  return url # for qq temporarily
+  return '{} {}'.format(url, info) # for qq temporarily
 
 reg_title = re.compile(r'<a class="js-title-link" href=(.*?)" target="_blank">(.*?)</a>')
 reg_li = re.compile(r'item clearfix.*?')

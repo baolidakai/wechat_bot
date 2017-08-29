@@ -1,10 +1,7 @@
 Wechat robot for fun
 
-The current text response is from tuling robot.
-
-Working on image classification
-
 ## Prerequisites
+* Get free api key on http://www.tuling123.com/member/center/
 * tensorflow
 * itchat
 * Install phantomjs https://www.vultr.com/docs/how-to-install-phantomjs-on-ubuntu-16-04
@@ -13,12 +10,13 @@ Working on image classification
 * Install https://github.com/NikolaiT/GoogleScraper
 * Add a file named data.json which stores something like:
 {
+    "API_KEY": "exampleapikey",
 	"trigger_nicknames": ["邓博文", ...],
 	"trigger_usernames": [
-	  "@14341204faee8b10343b43632b7aa83163b81c64e04825c7df32480d9d16a63a",
-	  ...
+	  "@myusername",
+      "@myfriendusername"
 	],
-	"myself_username": "@14341204faee8b10343b43632b7aa83163b81c64e04825c7df32480d9d16a63a"
+	"myself_username": "@myusername"
 }
 * Add a file named rules.json which stores manual rules like:
 {
@@ -27,7 +25,10 @@ Working on image classification
 }
 
 ## Functionaliy
-* reply chat message if you add a whitespace before the text
+* reply chat message if you add 小歪 before the message
+* return top web search result if you use the syntax [小歪搜索 cat]
+* search image if you use the syntax [小歪搜图 cat]
+* search on zhihu and return top result if you use the syntax [小歪搜知乎 cat]
 * recognize object inside an image if you send an image
 
 ## TODOs
@@ -37,6 +38,7 @@ Working on image classification
 * Enable emoji
 * Add teach you functionality
 * Add logic understanding
+* Add translation functionality
 
 ## File System
 utils.py: various utility methods
@@ -46,3 +48,5 @@ natural\_language\_processing.py: nlp program which returns a reply given a text
 models: directory containing the tensorflow/models module
 pre\_trained: directory which stores the model ckpt
 data.json: json file containing all private data
+
+## Examples
