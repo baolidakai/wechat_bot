@@ -25,20 +25,19 @@ Wechat robot for fun
 }
 
 ## Functionaliy
-* reply chat message if you add 小歪 before the message
+* reply chat message if you add 小歪 before the message [小歪你好]
 * return top web search result if you use the syntax [小歪搜索 cat]
 * search image if you use the syntax [小歪搜图 cat]
 * search on zhihu and return top result if you use the syntax [小歪搜知乎 cat]
+* search on wikipedia if you use the syntax [小歪搜wiki cat]
 * recognize object inside an image if you send an image
 
 ## TODOs
 * Add notification functionality
-* Search on wikipedia
 * Enable question answering using wolfram alpha api https://www.yangzhou301.com/2017/05/21/514548234/
 * Enable emoji
 * Add teach you functionality
 * Add logic understanding
-* Add translation functionality
 
 ## File System
 utils.py: various utility methods

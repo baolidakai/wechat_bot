@@ -78,3 +78,21 @@ def get_zhihu_search_result(keyword):
   except Exception as e:
     print(e)
   return ''
+
+def get_wikipedia_search_result(keyword):
+  try:
+    url = 'https://en.wikipedia.org/w/index.php?search={}&title=Special:Search&profile=default&fulltext=1'.format(urllib.parse.quote(keyword))
+    source = urllib.request.urlopen(url).read()
+    print('source got')
+    soup = BeautifulSoup(source, 'lxml')
+    ul = soup.find('ul', {'class': 'mw-search-results'})
+    li = ul.find('li')
+    heading = li.find('div', {'class': 'mw-search-result-heading'}).find('a')
+    link = urllib.parse.urljoin('https://en.wikipedia.org/', heading.get('href'))
+    title = heading.text
+    snippet = li.find('div', {'class': 'searchresult'}).text
+    rtn = '{} {}\n\n{}'.format(link, title, snippet)
+    return rtn
+  except Exception as e:
+    print(e)
+    return ''

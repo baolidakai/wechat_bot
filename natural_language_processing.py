@@ -12,6 +12,7 @@ special_feature_dict = {
   u'搜索': get_text_search_result,
   u'搜图': get_image_search_result,
   u'搜知乎': get_zhihu_search_result,
+  u'搜wiki': get_wikipedia_search_result,
   u'翻译': get_translation_result
 }
 
