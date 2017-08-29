@@ -5,15 +5,14 @@ import os
 import shutil
 import re
 import tensorflow as tf
+import _thread
 import time
 import itchat
 
 from natural_language_processing import get_response
+from utils import *
 
-#from qqbot import _bot as bot
 from qqbot import QQBotSlot as qqbotslot, RunBot
-
-#bot.Login(['-q', '1234'])
 
 DEBUG = False
 BUDGET = 100
@@ -24,6 +23,17 @@ def onQQMessage(bot, contact, member, content):
   global BUDGET
   if contact.name == '机器人' and content.startswith('小歪'):
     content = content[2:]
+    if content.startswith('提醒'):
+      content = content[3:]
+      try:
+        delay, msg = content.split(' ')
+        delay = to_second(delay)
+        _thread.start_new_thread(send_notification, (delay, msg, bot, contact, member, DEBUG))
+        BUDGET -= 1
+        return
+      except Exception as e:
+        print(e)
+        return
     try:    
       reply, status = get_response(content)
     except Exception as e:
@@ -49,4 +59,5 @@ def onQQMessage(bot, contact, member, content):
     print(member)
     print(content)
 
+print('Executing RunBot()')
 RunBot()

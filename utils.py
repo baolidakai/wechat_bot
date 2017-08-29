@@ -1,4 +1,5 @@
 # Return the source user to reply to, none if no need to reply
+import time
 import json
 import string
 
@@ -29,3 +30,34 @@ def is_english(s):
   else:
     return True
 
+def send_notification(delay, msg, bot, contact, member, DEBUG):
+  print('Will send message {} after {} seconds'.format(msg, delay))
+  time.sleep(delay)
+  print('{} seconds passed, sending message {}'.format(delay, msg))
+  if not DEBUG:
+    bot.SendTo(contact, '@{} {}'.format(member, msg))
+
+def to_second(delay):
+  rtn = 0
+  if 'h' in delay:
+    try:
+      num_hours = int(delay.split('h')[0])
+      delay = delay.split('h')[1]
+      rtn += num_hours * 3600
+    except:
+      pass
+  if 'm' in delay:
+    try:
+      num_minutes = int(delay.split('m')[0])
+      delay = delay.split('m')[1]
+      rtn += num_minutes * 60
+    except:
+      pass
+  if 's' in delay:
+    try:
+      num_seconds = int(delay.split('s')[0])
+      delay = delay.split('s')[1]
+      rtn += num_seconds
+    except:
+      pass
+  return rtn

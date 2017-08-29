@@ -36,11 +36,11 @@ where API\_KEY is the free app id for walfram alpha
 * search emoji if you use the syntax [小歪搜表情 cat]
 * chat with wolframalpha if you use the syntax [小歪英文 cat]
 * recognize object inside an image if you send an image (only available on wechat)
+* notify you after x hours y minutes z seconds with msg if you use the syntax [小歪提醒 xhymzs msg]
 
 ## TODOs
 * Add teach you functionality
 * Add logic understanding
-* Add notification functionality
 
 ## File System
 utils.py: various utility methods
