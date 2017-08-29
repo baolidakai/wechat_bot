@@ -13,7 +13,8 @@ special_feature_dict = {
   u'搜图': get_image_search_result,
   u'搜知乎': get_zhihu_search_result,
   u'搜wiki': get_wikipedia_search_result,
-  u'翻译': get_translation_result
+  u'翻译': get_translation_result,
+  u'英文': get_wolframalpha_search_result
 }
 
 # Given the content in a string, return the response and 
@@ -41,5 +42,6 @@ def get_response(content):
   try:
     r = requests.post(url, data=data).json()
     return r.get('text'), None
-  except:
+  except Exception as e:
+    print(e)
     return u'我断网了', None

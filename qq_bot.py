@@ -6,7 +6,6 @@ import tensorflow as tf
 import time
 import itchat
 
-# from computer_vision import convert_image
 from natural_language_processing import get_response
 
 from qqbot import _bot as bot
@@ -28,7 +27,8 @@ def onQQMessage(bot, contact, member, content):
     content = content[2:]
     try:    
       reply, status = get_response(content)
-    except:
+    except Exception as e:
+      print(e)
       reply = '失败了/哭'
       status = None
     print('Sending @{} {}'.format(member.name, reply))

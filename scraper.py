@@ -1,8 +1,11 @@
 from GoogleScraper import scrape_with_config
 from bs4 import BeautifulSoup
 from computer_vision import convert_image
-import urllib
+from utils import is_english
+from translate import *
 import requests
+import urllib
+import json
 import re
 
 config = {
@@ -29,7 +32,7 @@ def get_text_search_result(query):
       output = '\n'.join([top_result.link, top_result.title, '\n', str(top_result.snippet)])
   except Exception as e:
     print(e)
-    output = ''
+    output = '没搜到啊'
   return output
 
 def get_image_search_result(query):
@@ -48,7 +51,7 @@ def get_image_search_result(query):
     content = requests.get(url).content
   except Exception as e:
     print(e)
-    content = ''
+    content = '没搜到啊'
   try:
     with open('tmp.jpg', 'wb') as f:
       f.write(content)
@@ -77,7 +80,7 @@ def get_zhihu_search_result(keyword):
     return '{} {}'.format(link, title)
   except Exception as e:
     print(e)
-  return ''
+  return '没找到啊'
 
 def get_wikipedia_search_result(keyword):
   try:
@@ -95,4 +98,21 @@ def get_wikipedia_search_result(keyword):
     return rtn
   except Exception as e:
     print(e)
-    return ''
+    return '没找到啊'
+
+def get_wolframalpha_search_result(keyword):
+  rtn = ''
+  if not is_english(keyword):
+    keyword = get_translation_result(keyword)
+    rtn += 'Did you mean {}?\n'.format(keyword)
+  try:
+    data = json.load(open('data.json', 'r'))
+    app_id = data['APP_ID']
+    url = 'http://api.wolframalpha.com/v1/result?' + urllib.parse.urlencode({'appid': app_id, 'i': keyword,'timeout': '5'})
+    soup = BeautifulSoup(urllib.request.urlopen(url).read(), 'lxml')
+    rtn += soup.get_text()
+    return rtn
+  except Exception as e:
+    print(e)
+    rtn += '不知道怎么回答'
+    return rtn

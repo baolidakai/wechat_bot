@@ -2,6 +2,7 @@ Wechat robot for fun
 
 ## Prerequisites
 * Get free api key on http://www.tuling123.com/member/center/
+* Get free app id on https://developer.wolframalpha.com/portal/myapps/index.html
 * tensorflow
 * itchat
 * Install phantomjs https://www.vultr.com/docs/how-to-install-phantomjs-on-ubuntu-16-04
@@ -11,6 +12,7 @@ Wechat robot for fun
 * Add a file named data.json which stores something like:
 {
     "API_KEY": "exampleapikey",
+    "APP_ID": "exampleapiid",
 	"trigger_nicknames": ["邓博文", ...],
 	"trigger_usernames": [
 	  "@myusername",
@@ -18,6 +20,7 @@ Wechat robot for fun
 	],
 	"myself_username": "@myusername"
 }
+where API\_KEY is the free app id for walfram alpha
 * Add a file named rules.json which stores manual rules like:
 {
 	"名字": "小歪",
@@ -30,14 +33,14 @@ Wechat robot for fun
 * search image if you use the syntax [小歪搜图 cat]
 * search on zhihu and return top result if you use the syntax [小歪搜知乎 cat]
 * search on wikipedia if you use the syntax [小歪搜wiki cat]
+* chat with wolframalpha if you use the syntax [小歪英文 cat]
 * recognize object inside an image if you send an image
 
 ## TODOs
-* Add notification functionality
-* Enable question answering using wolfram alpha api https://www.yangzhou301.com/2017/05/21/514548234/
 * Enable emoji
 * Add teach you functionality
 * Add logic understanding
+* Add notification functionality
 
 ## File System
 utils.py: various utility methods

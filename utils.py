@@ -1,5 +1,6 @@
 # Return the source user to reply to, none if no need to reply
 import json
+import string
 
 def get_source(msg):
   user_data = json.load(open('data.json', 'r'))
@@ -19,3 +20,12 @@ def get_source(msg):
     print('friend message to me')
     return msg['FromUserName']
   return None
+
+def is_english(s):
+  try:
+    s.encode(encoding='utf-8').decode('ascii')
+  except UnicodeDecodeError:
+    return False
+  else:
+    return True
+
