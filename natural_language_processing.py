@@ -1,3 +1,5 @@
+print('Loading natural_language_processing')
+
 import requests
 import json
 
@@ -14,6 +16,7 @@ special_feature_dict = {
   u'搜知乎': get_zhihu_search_result,
   u'搜wiki': get_wikipedia_search_result,
   u'翻译': get_translation_result,
+  u'搜表情': get_emoji_search_result,
   u'英文': get_wolframalpha_search_result
 }
 

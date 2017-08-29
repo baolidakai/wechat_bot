@@ -33,11 +33,11 @@ where API\_KEY is the free app id for walfram alpha
 * search image if you use the syntax [小歪搜图 cat]
 * search on zhihu and return top result if you use the syntax [小歪搜知乎 cat]
 * search on wikipedia if you use the syntax [小歪搜wiki cat]
+* search emoji if you use the syntax [小歪搜表情 cat]
 * chat with wolframalpha if you use the syntax [小歪英文 cat]
-* recognize object inside an image if you send an image
+* recognize object inside an image if you send an image (only available on wechat)
 
 ## TODOs
-* Enable emoji
 * Add teach you functionality
 * Add logic understanding
 * Add notification functionality

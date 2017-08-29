@@ -1,3 +1,5 @@
+print('Loading scraper.py')
+
 from GoogleScraper import scrape_with_config
 from bs4 import BeautifulSoup
 from computer_vision import convert_image
@@ -5,6 +7,7 @@ from utils import is_english
 from translate import *
 import requests
 import urllib
+import random
 import json
 import re
 
@@ -28,7 +31,7 @@ def get_text_search_result(query):
     search = scrape_with_config(config)
     serp = search.serps[0]
     if serp.status == 'successful':
-      top_result = serp.links[0]
+      top_result = random.choice(serp.links)
       output = '\n'.join([top_result.link, top_result.title, '\n', str(top_result.snippet)])
   except Exception as e:
     print(e)
@@ -45,7 +48,7 @@ def get_image_search_result(query):
   try:
     search = scrape_with_config(config)
     serp = search.serps[0]
-    top_result = serp.links[0]
+    top_result = random.choice(serp.links)
     url = top_result.link
     url = urllib.parse.unquote(url)
     content = requests.get(url).content
@@ -83,6 +86,7 @@ def get_zhihu_search_result(keyword):
   return '没找到啊'
 
 def get_wikipedia_search_result(keyword):
+  print('Searching [{}] on wikipedia'.format(keyword))
   try:
     url = 'https://en.wikipedia.org/w/index.php?search={}&title=Special:Search&profile=default&fulltext=1'.format(urllib.parse.quote(keyword))
     source = urllib.request.urlopen(url).read()
@@ -101,6 +105,7 @@ def get_wikipedia_search_result(keyword):
     return '没找到啊'
 
 def get_wolframalpha_search_result(keyword):
+  print('Searching [{}] on wolframalpha'.format(keyword))
   rtn = ''
   if not is_english(keyword):
     keyword = get_translation_result(keyword)
@@ -116,3 +121,17 @@ def get_wolframalpha_search_result(keyword):
     print(e)
     rtn += '不知道怎么回答'
     return rtn
+
+def get_emoji_search_result(keyword):
+  print('Searching emoji {}'.format(keyword))
+  try:
+    kw = urllib.parse.quote(keyword)
+    url = 'http://fabiaoqing.com/search/search/keyword/{}'.format(kw)
+    print(url)
+    soup = BeautifulSoup(urllib.request.urlopen(url).read(), 'html.parser')
+    images = [node['data-original'] for node in soup.select('img.bqppsearch')]
+    image_url = random.choice(images)
+    return image_url
+  except Exception as e:
+    print(e)
+    return '没找到啊'

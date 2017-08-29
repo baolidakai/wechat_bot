@@ -1,3 +1,5 @@
+print('Loading qq_bot.py')
+
 import requests
 import os
 import shutil
@@ -8,13 +10,10 @@ import itchat
 
 from natural_language_processing import get_response
 
-from qqbot import _bot as bot
+#from qqbot import _bot as bot
 from qqbot import QQBotSlot as qqbotslot, RunBot
 
-bot.Login(['-q', '1234'])
-
-group = bot.List('group', '机器人')[0]
-members = [member.name for member in bot.List(group)]
+#bot.Login(['-q', '1234'])
 
 DEBUG = False
 BUDGET = 100
@@ -23,7 +22,7 @@ BUDGET = 100
 def onQQMessage(bot, contact, member, content):
   global DEBUG
   global BUDGET
-  if contact.name == group.name and member.name in members and content.startswith('小歪'):
+  if contact.name == '机器人' and content.startswith('小歪'):
     content = content[2:]
     try:    
       reply, status = get_response(content)
