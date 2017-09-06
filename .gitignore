@@ -5,6 +5,7 @@ img/*
 models/*
 __pycache__/*
 pre_trained/*
+CycleGAN-TensorFlow/*
 data.json
 rules.json
 google_scraper.db

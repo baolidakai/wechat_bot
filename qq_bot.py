@@ -1,4 +1,5 @@
 print('Loading qq_bot.py')
+from qqbot import QQBotSlot as qqbotslot, RunBot
 
 import requests
 import os
@@ -12,7 +13,6 @@ import itchat
 from natural_language_processing import get_response
 from utils import *
 
-from qqbot import QQBotSlot as qqbotslot, RunBot
 
 DEBUG = False
 BUDGET = 100
@@ -61,3 +61,4 @@ def onQQMessage(bot, contact, member, content):
 
 print('Executing RunBot()')
 RunBot()
+print('Executed')

@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from computer_vision import convert_image
 from utils import is_english
 from translate import *
+import subprocess
 import requests
 import urllib
 import random
@@ -135,3 +136,10 @@ def get_emoji_search_result(keyword):
   except Exception as e:
     print(e)
     return '没找到啊'
+
+def to_zebra(msg):
+  try:
+    subprocess.call('python3 CycleGAN-TensorFlow/inference.py --model pre_trained/horse2zebra.pb --input tmp.jpg --output ../www/output.jpg --image_size 256', shell=True)
+    return 'www.bowendeng.com/output.jpg'
+  except:
+    return 'Failed'

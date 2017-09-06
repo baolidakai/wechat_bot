@@ -5,6 +5,7 @@ import json
 
 from scraper import *
 from translate import *
+from makegirls_crawler import *
 
 data = json.load(open('data.json', 'r'))
 API_KEY = data['API_KEY']
@@ -17,7 +18,9 @@ special_feature_dict = {
   u'搜wiki': get_wikipedia_search_result,
   u'翻译': get_translation_result,
   u'搜表情': get_emoji_search_result,
-  u'英文': get_wolframalpha_search_result
+  u'英文': get_wolframalpha_search_result,
+  u'造妹子': get_girl,
+  u'变斑马': to_zebra
 }
 
 # Given the content in a string, return the response and 

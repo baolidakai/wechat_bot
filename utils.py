@@ -32,6 +32,8 @@ def is_english(s):
 
 def send_notification(delay, msg, bot, contact, member, DEBUG):
   print('Will send message {} after {} seconds'.format(msg, delay))
+  if not DEBUG:
+    bot.SendTo(contact, '@{} I will notify you after {} seconds'.format(member, delay))
   time.sleep(delay)
   print('{} seconds passed, sending message {}'.format(delay, msg))
   if not DEBUG:
